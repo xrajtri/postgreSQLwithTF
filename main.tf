@@ -104,9 +104,11 @@ resource "aws_db_instance" "postgres_instance" {
   db_subnet_group_name   = aws_db_subnet_group.rds_subnet_group.name
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   skip_final_snapshot    = true
-    # Enable Enhanced Monitoring
+  # Enable Enhanced Monitoring
   monitoring_interval = 60  # Set interval to 60 seconds (valid values: 1, 5, 10, 15, 30, 60)
   monitoring_role_arn = aws_iam_role.rds_monitoring_role.arn
+  # Enable Deletion Protection
+  deletion_protection = true
 
   tags = {
     Name = "postgres-rds-instance"
